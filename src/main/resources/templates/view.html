@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <title>View</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" data-th-href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" data-th-href="@{/css/font-awesome.min.css}" href="../static/css/font-awesome.min.css" />
+    
+    <script data-th-src="@{/js/jquery-3.2.1.min.js}" src="../static/js/jquery-3.2.1.min.js"></script>
+    <script data-th-src="@{/js/popper.min.js}" src="../static/js/popper.min.js"></script>
+    <script data-th-src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class ="text-center text-info">Health Profile</h1>
+        <div class="float-right">
+            <a data-th-href="@{/}" href="login.html">Exit</a>
+        </div><br>
+        <div class="card card-body bg-secondary text-white">
+            <h2 data-th-text="${medicalData.firstname} ? 'Name: ' + ${medicalData.prename} + ' ' + ${medicalData.firstname} + ' ' + ${medicalData.lastname} + ', Age: ' + ${medicalData.age} : 'Not found patient'"></h2>
+            <p data-th-text="${medicalData.weight} ? 'Height: ' + ${medicalData.height} + ', ' + 'Weight: ' + ${medicalData.weight} + ', '+ 'BMI: ' + ${medicalData.bmi} : ''"></p>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header p-0 bg-info" id="headDiagnosis">
+                        <div class="container row p-0">
+                            <div class="col"><a class="btn btn-block text-white" role="button" data-toggle="collapse" href="#Diagnosis" aria-controls="Diagnosis">Medical Problems</a></div>
+                            <!--<div class="col-1"><a class="btn btn-lg" role="button" data-toggle="modal" data-target="#fullDiagnosis"><i class="fa fa-window-maximize fa-lg align-top" aria-hidden="true"></i></a></div>-->
+                        </div>
+                    </div>
+                    <div id="Diagnosis" class="collapse show" aria-labelledby="headDiagnosis">
+                        <div class="card-body bg-light">
+                            <ul class="list-group" data-th-if="!${medicalData} or ${medicalData.diagnosises.empty}">
+                                <li>No Medical Problem</li>
+                            </ul>
+                            <ul class="list-group" data-th-each="diagnosis : ${medicalData.diagnosises}">
+                                <li data-th-text="${diagnosis.description}+' on '+${diagnosis.datetime}+' at '+${diagnosis.place}+' by '+${diagnosis.person}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="fullDiagnosis" class="modal" tabindex="-1" role="dialog" aria-labelledby="fullDiagnosisLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="fullDiagnosisLabel">Medical Problems</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header p-0 bg-info" id="headDrugs">
+                        <div class="container row p-0">
+                            <div class="col"><a class="btn btn-block text-white" role="button" data-toggle="collapse" href="#Drugs" aria-controls="Drugs">Medications</a></div>
+                            <!--<div class="col-1"><a class="btn btn-lg" role="button" data-toggle="modal" data-target="#fullDrug"><i class="fa fa-window-maximize fa-lg align-top" aria-hidden="true"></i></a></div>-->
+                        </div>
+                    </div>
+                    <div id="Drugs" class="collapse show" aria-labelledby="headDrugs">
+                        <div class="card-body bg-light">
+                            <ul class="list-group" data-th-if="!${medicalData} or ${medicalData.drugs.empty}">
+                                <li>No Medication</li>
+                            </ul>
+                            <ul class="list-group" data-th-each="drug : ${medicalData.drugs}">
+                                <li data-th-text="${drug.description}+' on '+${drug.datetime}+' at '+${drug.place}+' by '+${drug.person}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="fullDrug" class="modal" tabindex="-1" role="dialog" aria-labelledby="fullDrugLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="fullDrugLabel">Medications</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header p-0 bg-info" id="headProcedures">
+                        <div class="container row p-0">
+                            <div class="col"><a class="btn btn-block text-white" role="button" data-toggle="collapse" href="#Procedures" aria-controls="Procedures">Allergies</a></div>
+                            <!--<div class="col-1"><a class="btn btn-lg" role="button" data-toggle="modal" data-target="#fullProcedure"><i class="fa fa-window-maximize fa-lg align-top" aria-hidden="true"></i></a></div>-->
+                        </div>
+                    </div>
+                    <div id="Procedures" class="collapse show" aria-labelledby="headProcedures">
+                        <div class="card-body bg-light">
+                            <ul class="list-group" data-th-if="!${medicalData} or ${medicalData.procedures.empty}">
+                                <li>No Allergy</li>
+                            </ul>
+                            <ul class="list-group" data-th-each="procedure : ${medicalData.procedures}">
+                                <li data-th-text="${procedure.description}+' on '+${procedure.datetime}+' at '+${procedure.place}+' by '+${procedure.person}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="fullProcedure" class="modal" tabindex="-1" role="dialog" aria-labelledby="fullProcedureLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="fullProcedureLabel">Allergies</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--<div class="card">
+                    <div class="card-header p-0 bg-info" id="headMedHistory">
+                        <div class="container row p-0">
+                            <div class="col"><a class="btn btn-block text-white" role="button" data-toggle="collapse" href="#MedHistory" aria-controls="MedHistory">History</a></div>
+                            <div class="col-1"><a class="btn btn-lg" role="button" data-toggle="modal" data-target="#fullMedHistory"><i class="fa fa-window-maximize fa-lg align-top" aria-hidden="true"></i></a></div>
+                        </div>
+                    </div>
+                    <div id="MedHistory" class="collapse show" aria-labelledby="headMedHistory">
+                        <div class="card-body bg-light">
+                            <ul class="list-group" data-th-if="!${medicalData} or ${medicalData.medHistorys.empty}">
+                                <li>No History</li>
+                            </ul>
+                            <ul class="list-group" data-th-each="medHistory : ${medicalData.medHistorys}">
+                                <li data-th-text="${medHistory.description}+' on '+${medHistory.datetime}+' at '+${medHistory.place}+' by '+${medHistory.person}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="fullMedHistory" class="modal" tabindex="-1" role="dialog" aria-labelledby="fullMedHistoryLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="fullMedHistoryLabel">History</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header p-0 bg-info" id="headDemographics">
+                        <div class="container row p-0">
+                            <div class="col"><a class="btn btn-block text-white" role="button" data-toggle="collapse" href="#Demographic" aria-controls="Visit">Demographics</a></div>
+                            <!--<div class="col-1"><a class="btn btn-lg" role="button" data-toggle="modal" data-target="#fullDemographic"><i class="fa fa-window-maximize fa-lg align-top" aria-hidden="true"></i></a></div>-->
+                        </div>
+                    </div>
+                    <div id="Demographic" class="collapse show" aria-labelledby="headDemographics">
+                        <div class="card-body bg-light">
+                            <ul class="list-group" data-th-if="!${medicalData} or ${medicalData.demographics.empty}">
+                                <li>No Demographic</li>
+                            </ul>
+                            <ul class="list-group" data-th-each="demographic : ${medicalData.demographics}">
+                                <li data-th-text="${demographic.description}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="fullDemographic" class="modal" tabindex="-1" role="dialog" aria-labelledby="fullDemographicLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="fullVisitLabel">Demographics</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header p-0 bg-info" id="headCheckup">
+                        <div class="container row p-0">
+                            <div class="col"><a class="btn btn-block text-white" role="button" data-toggle="collapse" href="#Checkup" aria-controls="Checkup">Checkup</a></div>
+                            <!--<div class="col-1"><a class="btn btn-lg" role="button" data-toggle="modal" data-target="#fullCheckup"><i class="fa fa-window-maximize fa-lg align-top" aria-hidden="true"></i></a></div>-->
+                        </div>
+                    </div>
+                    <div id="Checkup" class="collapse show" aria-labelledby="headCheckup">
+                        <div class="card-body bg-light">
+                            <ul class="list-group" data-th-if="!${medicalData} or ${medicalData.checkups.empty}">
+                                <li>No Checkup</li>
+                            </ul>
+                            <ul class="list-group" data-th-each="checkup : ${medicalData.checkups.get(0)}">
+                                <li data-th-text="${checkup.description}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="fullCheckup" class="modal" tabindex="-1" role="dialog" aria-labelledby="fullCheckupLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="fullCheckupLabel">Checkups</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header p-0 bg-info" id="headVaccine">
+                        <div class="container row p-0">
+                            <div class="col"><a class="btn btn-block text-white" role="button" data-toggle="collapse" href="#Vaccine" aria-controls="Vaccine">Vaccines</a></div>
+                            <!--<div class="col-1"><a class="btn btn-lg" role="button" data-toggle="modal" data-target="#fullVaccine"><i class="fa fa-window-maximize fa-lg align-top" aria-hidden="true"></i></a></div>-->
+                        </div>
+                    </div>
+                    <div id="Vaccine" class="collapse show" aria-labelledby="headVaccine">
+                        <div class="card-body bg-light">
+                            <!--<p>Most recent vitals from: <span data-th-text="${medicalData} and !${medicalData.vitalsigns.empty} ? ${vitalsigns[0].datetime} : 0000-00-00 00:00:00"></span></p>-->
+                            <ul class="list-group" data-th-if="!${medicalData} or ${medicalData.vaccines.empty}">
+                                <li>No Vaccines</li>
+                            </ul>
+                            <ul class="list-group" data-th-each="vaccine : ${medicalData.vaccines}">
+                                <li data-th-text="${vaccine.description}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="fullVaccine" class="modal" tabindex="-1" role="dialog" aria-labelledby="fullVaccineLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="fullVaccineLabel">Vaccines</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--<div class="card">
+                    <div class="card-header p-0 bg-info" id="headXray">
+                        <div class="container row p-0">
+                            <div class="col"><a class="btn btn-block text-white" role="button" data-toggle="collapse" href="#Xray" aria-controls="Xray">X-Ray</a></div>
+                            <div class="col-1"><a class="btn btn-lg" role="button" data-toggle="modal" data-target="#fullXray"><i class="fa fa-window-maximize fa-lg align-top" aria-hidden="true"></i></a></div>
+                        </div>
+                    </div>
+                    <div id="Xray" class="collapse show" aria-labelledby="headXray">
+                        <div class="card-body bg-light">
+                            <ul class="list-group" data-th-if="!${medicalData} or ${medicalData.xrays.empty}">
+                                <li>No X-Ray</li>
+                            </ul>
+                            <ul class="list-group" data-th-each="xray : ${medicalData.xrays}">
+                                <li data-th-text="${xray.description}+' on '+${xray.datetime}+' at '+${xray.place}+' by '+${xray.person}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="fullXray" class="modal" tabindex="-1" role="dialog" aria-labelledby="fullXrayLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="fullXrayLabel">X-Rays</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
