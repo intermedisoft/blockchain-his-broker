@@ -6,7 +6,6 @@
 package com.depa.hisbroker.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
@@ -24,14 +23,14 @@ public class MedicalData {
     private String birthdate;
     private String height;
     private String weight;
-    private Iterable<List<GenericModelData>> checkups = new ArrayList();
-    private Iterable<GenericModelData> drugs = new ArrayList();
-    private Iterable<GenericModelData> xrays = new ArrayList();
-    private Iterable<GenericModelData> diagnosises = new ArrayList();
-    private Iterable<GenericModelData> procedures = new ArrayList();
-    private Iterable<GenericModelData> medHistorys = new ArrayList();
-    private Iterable<GenericModelData> vaccines = new ArrayList();
-    private Iterable<GenericModelData> demographics = new ArrayList();
+    private Iterable<List<GenericModel>> checkups = new ArrayList();
+    private Iterable<GenericModel> medications = new ArrayList();
+    private Iterable<List<GenericModel>> xrays = new ArrayList();
+    private Iterable<GenericModel> diagnosises = new ArrayList();
+    private Iterable<GenericModel> procedures = new ArrayList();
+    private Iterable<GenericModel> medHistorys = new ArrayList();
+    private Iterable<GenericModel> vaccines = new ArrayList();
+    private Iterable<GenericModel> demographics = new ArrayList();
     public String getId() {
         return id;
     }
@@ -116,73 +115,73 @@ public class MedicalData {
         return bmiStr;
     }
     
-    public Iterable<List<GenericModelData>> getCheckups() {
+    public Iterable<List<GenericModel>> getCheckups() {
         return checkups;
     }
 
-    public void setCheckups(Iterable<List<GenericModelData>> checkups) {
+    public void setCheckups(Iterable<List<GenericModel>> checkups) {
         this.checkups = checkups;
     }
 
-    public Iterable<GenericModelData> getDrugs() {
-        return drugs;
+    public Iterable<GenericModel> getMedications() {
+        return medications;
     }
 
-    public void setDrugs(Iterable<GenericModelData> drugs) {
-        this.drugs = drugs;
+    public void setMedications(Iterable<GenericModel> medications) {
+        this.medications = medications;
     }
 
-    public Iterable<GenericModelData> getXrays() {
+    public Iterable<List<GenericModel>> getXrays() {
         return xrays;
     }
 
-    public void setXrays(Iterable<GenericModelData> xrays) {
+    public void setXrays(Iterable<List<GenericModel>> xrays) {
         this.xrays = xrays;
     }
 
-    public Iterable<GenericModelData> getDiagnosises() {
+    public Iterable<GenericModel> getDiagnosises() {
         return diagnosises;
     }
 
-    public void setDiagnosises(Iterable<GenericModelData> diagnosises) {
+    public void setDiagnosises(Iterable<GenericModel> diagnosises) {
         this.diagnosises = diagnosises;
     }
 
-    public Iterable<GenericModelData> getProcedures() {
+    public Iterable<GenericModel> getProcedures() {
         return procedures;
     }
 
-    public void setProcedures(Iterable<GenericModelData> procedures) {
+    public void setProcedures(Iterable<GenericModel> procedures) {
         this.procedures = procedures;
     }
 
-    public Iterable<GenericModelData> getMedHistorys() {
+    public Iterable<GenericModel> getMedHistorys() {
         return medHistorys;
     }
 
-    public void setMedHistorys(Iterable<GenericModelData> medHistorys) {
+    public void setMedHistorys(Iterable<GenericModel> medHistorys) {
         this.medHistorys = medHistorys;
     }
 
-    public Iterable<GenericModelData> getVaccines() {
+    public Iterable<GenericModel> getVaccines() {
         return vaccines;
     }
 
-    public void setVaccines(Iterable<GenericModelData> vaccines) {
+    public void setVaccines(Iterable<GenericModel> vaccines) {
         this.vaccines = vaccines;
     }
 
-    public Iterable<GenericModelData> getDemographics() {
+    public Iterable<GenericModel> getDemographics() {
         return demographics;
     }
 
-    public void setDemographics(Iterable<GenericModelData> demographics) {
+    public void setDemographics(Iterable<GenericModel> demographics) {
         this.demographics = demographics;
     }
-
+    
     @Override
     public String toString() {
-        return "MedicalData{" + "id=" + id + ", prename=" + prename + ", firstname=" + firstname + ", lastname=" + lastname + ", birthdate=" + birthdate + ", height=" + height + ", weight=" + weight + ", checkups=" + checkups + ", drugs=" + drugs + ", xrays=" + xrays + ", diagnosises=" + diagnosises + ", procedures=" + procedures + ", medHistorys=" + medHistorys + ", vaccines=" + vaccines + ", demographics=" + demographics + '}';
+        return "MedicalData{" + "id=" + id + ", prename=" + prename + ", firstname=" + firstname + ", lastname=" + lastname + ", birthdate=" + birthdate + ", height=" + height + ", weight=" + weight + ", checkups=" + checkups + ", medications=" + medications + ", xrays=" + xrays + ", diagnosises=" + diagnosises + ", procedures=" + procedures + ", medHistorys=" + medHistorys + ", vaccines=" + vaccines + ", demographics=" + demographics + '}';
     }
     
 }

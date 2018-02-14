@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.ejb.access.SimpleRemoteStatelessSessionProxyFactoryBean;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -20,8 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author Prasert
  */
 @SpringBootApplication
-//@EnableScheduling
-@PropertySource("classpath:jndiDev.properties")
+@EnableScheduling
 public class Application {
     
     @Autowired
@@ -53,10 +51,18 @@ public class Application {
         return getEjb(IMedRegistrationEjb.class, "RegistrationManage");
     }
     
+    private Properties getBlockchainConfig(){
+        Properties configs = new Properties();
+        configs.put("base_url", env.getRequiredProperty("blockchain.server.base.url"));
+        configs.put("token", env.getRequiredProperty("blockchain.his.token"));
+        configs.put("wallet", env.getRequiredProperty("blockchain.his.wallet"));
+        return configs;
+    }
+    
     @Bean
     public MedicalDataRepository medicalDataRepository(){
         //return new InMemoryMedicalDataRepository();
-        return new BlockchainMedicalDataRepository();
+        return new BlockchainMedicalDataRepository(getBlockchainConfig());
     }
     
     public static void main(String[] args) throws Exception {

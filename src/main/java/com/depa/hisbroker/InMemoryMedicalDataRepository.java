@@ -5,8 +5,10 @@
  */
 package com.depa.hisbroker;
 
-import com.depa.hisbroker.model.GenericModelData;
+import com.depa.hisbroker.model.CheckupModel;
+import com.depa.hisbroker.model.GenericModel;
 import com.depa.hisbroker.model.MedicalData;
+import com.depa.hisbroker.model.XrayModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,13 +27,8 @@ public class InMemoryMedicalDataRepository implements MedicalDataRepository{
     }
     
     @Override
-    public MedicalData save(MedicalData medicalData) {
-        String id = medicalData.getId();
-        if (id == null) {
-            throw new RuntimeException("Can not save medical data cause id is null.");
-        }
-        this.medicalDatas.put(id, medicalData);
-        return medicalData;
+    public String save(CheckupModel checkup) {
+        return null;
     }
 
     @Override
@@ -49,54 +46,54 @@ public class InMemoryMedicalDataRepository implements MedicalDataRepository{
         medicalData.setBirthdate("1977-07-07");
         medicalData.setWeight("57");
         medicalData.setHeight("173");
-        List<GenericModelData> demographics = new ArrayList<>();
-        demographics.add(new GenericModelData("Name: Navin Leenatum", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        demographics.add(new GenericModelData("DOB: 1977-07-07", "2017-05-11", "Pensook Clinic", "Dr.B"));
-        demographics.add(new GenericModelData("Personal ID: 3809900380115", "2017-08-15", "Hadyai Hospital", "Dr.C"));
-        demographics.add(new GenericModelData("Sex: Male", "2017-08-15", "Hadyai Hospital", "Dr.C"));
-        demographics.add(new GenericModelData("Martital Status: Single", "2017-08-15", "Hadyai Hospital", "Dr.C"));
-        demographics.add(new GenericModelData("Language: English", "2017-08-15", "Hadyai Hospital", "Dr.C"));
-        demographics.add(new GenericModelData("Religion:", "2017-08-15", "Hadyai Hospital", "Dr.C"));
-        demographics.add(new GenericModelData("Primary Insurance: AIA", "2017-08-15", "Hadyai Hospital", "Dr.C"));
+        List<GenericModel> demographics = new ArrayList<>();
+        demographics.add(new GenericModel("Name: Navin Leenatum", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        demographics.add(new GenericModel("DOB: 1977-07-07", "2017-05-11", "Pensook Clinic", "Dr.B"));
+        demographics.add(new GenericModel("Personal ID: 3809900380115", "2017-08-15", "Hadyai Hospital", "Dr.C"));
+        demographics.add(new GenericModel("Sex: Male", "2017-08-15", "Hadyai Hospital", "Dr.C"));
+        demographics.add(new GenericModel("Martital Status: Single", "2017-08-15", "Hadyai Hospital", "Dr.C"));
+        demographics.add(new GenericModel("Language: English", "2017-08-15", "Hadyai Hospital", "Dr.C"));
+        demographics.add(new GenericModel("Religion:", "2017-08-15", "Hadyai Hospital", "Dr.C"));
+        demographics.add(new GenericModel("Primary Insurance: AIA", "2017-08-15", "Hadyai Hospital", "Dr.C"));
         medicalData.setDemographics(demographics);
         
-        List<GenericModelData> medications = new ArrayList<>();
-        medications.add(new GenericModelData("Metformin", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        medications.add(new GenericModelData("Lipitor", "2017-05-11", "Pensook Clinic", "Dr.B"));
-        medications.add(new GenericModelData("Lisinopril", "2017-08-15", "Hadyai Hospital", "Dr.C"));
-        medicalData.setDrugs(medications);
+        List<GenericModel> medications = new ArrayList<>();
+        medications.add(new GenericModel("Metformin", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        medications.add(new GenericModel("Lipitor", "2017-05-11", "Pensook Clinic", "Dr.B"));
+        medications.add(new GenericModel("Lisinopril", "2017-08-15", "Hadyai Hospital", "Dr.C"));
+        medicalData.setMedications(medications);
         
-        List<List<GenericModelData>> checkups = new ArrayList<>();
-        List<GenericModelData> checkup = new ArrayList<>();
-        checkup.add(new GenericModelData("FBS: Normal ", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        checkup.add(new GenericModelData("BUN: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        checkup.add(new GenericModelData("Creatinine: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        checkup.add(new GenericModelData("Cholesterol: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        checkup.add(new GenericModelData("Triglyceride: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        checkup.add(new GenericModelData("AST: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        checkup.add(new GenericModelData("ALT: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        List<List<GenericModel>> checkups = new ArrayList<>();
+        List<GenericModel> checkup = new ArrayList<>();
+        checkup.add(new GenericModel("FBS: Normal ", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        checkup.add(new GenericModel("BUN: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        checkup.add(new GenericModel("Creatinine: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        checkup.add(new GenericModel("Cholesterol: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        checkup.add(new GenericModel("Triglyceride: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        checkup.add(new GenericModel("AST: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        checkup.add(new GenericModel("ALT: Normal", "2017-03-01", "Phuket Hospital", "Dr.A"));
         checkups.add(checkup);
         medicalData.setCheckups(checkups);
         
         
-        List<GenericModelData> medicalProblems = new ArrayList<>();
-        medicalProblems.add(new GenericModelData("diabetes", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        List<GenericModel> medicalProblems = new ArrayList<>();
+        medicalProblems.add(new GenericModel("diabetes", "2017-03-01", "Phuket Hospital", "Dr.A"));
         medicalData.setDiagnosises(medicalProblems);
         
-        List<GenericModelData> vaccines = new ArrayList<>();
-        /*vaccines.add(new GenericModelData("Blod Pressure: 150/80", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        vaccines.add(new GenericModelData("Height: 152 cm", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        vaccines.add(new GenericModelData("Weight: 68 kg", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        vaccines.add(new GenericModelData("BMI: 29 kg/m^2", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        vaccines.add(new GenericModelData("BMI Status: Overweight", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        vaccines.add(new GenericModelData("Respiration: 22 per min", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        vaccines.add(new GenericModelData("Temperature: 37.23 C", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        vaccines.add(new GenericModelData("Pulse: 99 per min", "2017-03-01", "Phuket Hospital", "Dr.A"));
-        vaccines.add(new GenericModelData("Oxygen Saturation: 97%", "2017-03-01", "Phuket Hospital", "Dr.A"));*/
+        List<GenericModel> vaccines = new ArrayList<>();
+        /*vaccines.add(new GenericModel("Blod Pressure: 150/80", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        vaccines.add(new GenericModel("Height: 152 cm", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        vaccines.add(new GenericModel("Weight: 68 kg", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        vaccines.add(new GenericModel("BMI: 29 kg/m^2", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        vaccines.add(new GenericModel("BMI Status: Overweight", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        vaccines.add(new GenericModel("Respiration: 22 per min", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        vaccines.add(new GenericModel("Temperature: 37.23 C", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        vaccines.add(new GenericModel("Pulse: 99 per min", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        vaccines.add(new GenericModel("Oxygen Saturation: 97%", "2017-03-01", "Phuket Hospital", "Dr.A"));*/
         medicalData.setVaccines(vaccines);
         
-        List<GenericModelData> allergies = new ArrayList<>();
-        allergies.add(new GenericModelData("penicillin", "2017-03-01", "Phuket Hospital", "Dr.A"));
+        List<GenericModel> allergies = new ArrayList<>();
+        allergies.add(new GenericModel("penicillin", "2017-03-01", "Phuket Hospital", "Dr.A"));
         medicalData.setProcedures(allergies);
         
         this.medicalDatas.put(medicalData.getId(), medicalData);
@@ -104,7 +101,17 @@ public class InMemoryMedicalDataRepository implements MedicalDataRepository{
     }
 
     @Override
-    public String checkAuthorize(String id) {
+    public String requestAuthorize(String id) {
         return "GRANT";
+    }
+    
+    @Override
+    public String revokeAuthorize(String id) {
+        return "REVOKE";
+    }
+
+    @Override
+    public String save(XrayModel xrayModel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

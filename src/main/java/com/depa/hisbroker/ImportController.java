@@ -29,13 +29,7 @@ public class ImportController {
     @GetMapping("{type}")
     public String installData(@PathVariable("type") String type){
         LOG.warn("param type = "+type);
-        if("vaccine".equals(type)){
-            this.medicalDataRepository.installData(type);
-        }else if("checkup".equals(type)){
-            this.medicalDataRepository.installData(type);
-        }else{
-            
-        }
+        this.medicalDataRepository.installData(type);
         return "";
     }
 }
